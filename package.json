@@ -1,7 +1,7 @@
 {
   "name": "spotify-api",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://itshdog.github.io/spotify-api",
   "dependencies": {
     "-": "^0.0.1",
