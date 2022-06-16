@@ -16,12 +16,25 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
+  width: 100%;
+  display: inline-block;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header div {
+  background: rgba(0,0,0,0.15);
+  border-radius: 1em;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.App-header div img {
+  border-radius: 1em;
 }
 
 .App-link {
