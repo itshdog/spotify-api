@@ -24,20 +24,41 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Spotify Stats</title>
+    <style type="text/css">
+      #login {
+        display: none;
+      }
+    
+      #loggedin {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div>
+      <div id="login">
+       <h1>First, log in to spotify</h1>
+       <a href="/login">Log in</a>
+      </div>
+      <div id="loggedin">
+      </div>
+   </div>
+  
+   <script id="loggedin-template" type="text/x-handlebars-template">
+      <h1>Logged in as </h1>
+      <img id="avatar" width="200" src="" />
+      <dl>
+       <dt>Display name</dt><dd></dd>
+       <dt>Username</dt><dd></dd>
+       <dt>Email</dt><dd></dd>
+       <dt>Spotify URI</dt><dd><a href=""></a></dd>
+       <dt>Link</dt><dd><a href=""></a></dd>
+       <dt>Profile Image</dt><dd></dd>
+      </dl>
+      <p><a href="/">Log in again</a></p>
+   </script>
   </body>
 </html>
