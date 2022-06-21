@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function App() {
   const CLIENT_ID = "9b70a0adf80f4d5d9f8254000bbf6bfa"
-  const REDIRECT_URI = "https://itshdog.github.io/spotify-api/"
+  const REDIRECT_URI = "http://localhost:3000/spotify-api"
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
   const RESPONSE_TYPE = "token"
   const [token, setToken] = useState("")
@@ -26,6 +26,23 @@ function App() {
 
   }, [])
 
+  const userName = () => {
+    const {data} = axios.get("https://api.spotify.com/v1/me", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    return (
+      <>
+        {data?.images ? <img src={data.images[0]}/> : ""}
+        {data.display_name ? <span>{data.display_name}</span> : "User"}
+      </>
+    )
+  };
+
   const searchArtists = async (e) => {
     e.preventDefault()
     const {data} = await axios.get("https://api.spotify.com/v1/search", {
@@ -44,7 +61,7 @@ function App() {
   const renderArtists = () => {
     return artists.map(artist => (
         <div key={artist.id}>
-            {artist.images.length ? <img height={"250px"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+            {artist.images.length ? <img height={"250px"} width={"250px"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
             {artist.name}
         </div>
     ))
@@ -62,7 +79,10 @@ function App() {
         
         {!token ?
           <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
-          : <button onClick={logout}>Logout</button>
+          : <><button onClick={logout}>Logout</button>
+            <a id="loggedin" href="/">
+              {userName()}
+            </a></>
         }
 
         {token ?
@@ -71,6 +91,7 @@ function App() {
             <button type={"submit"}>Search</button>
           </form> : <></>
         }
+
 
         {renderArtists()}
       </header>
